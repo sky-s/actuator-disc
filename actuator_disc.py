@@ -15,9 +15,8 @@ import numpy as np
 
 def induced_velocity(thrust, density, area, velocity=0):
     """Actuator disc induced velocity calculation (classic momentum theory)."""
-    v_i_static = np.sqrt(thrust / (2 * density * area))
-    return -velocity / 2 + v_i_static * np.sqrt(
-        (velocity / (2 * v_i_static))**2 + 1)
+    return -velocity / 2 + np.sqrt((velocity / 2)**2
+                                   + thrust / (2 * density * area))
 
 
 def thrust(shaft_power, density, area, velocity=0, disc_efficiency=1):

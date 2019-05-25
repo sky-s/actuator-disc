@@ -19,6 +19,8 @@ function [thrust,propellerEfficiency,inducedVelocity,idealEfficiency] = ...
 %   There is no unit conversion, so units must be consistent, e.g. power in
 %   ft-lbf/s instead of horsepower.
 % 
+%   Undefined when power = 0 (answer is thrust = 0).
+% 
 %   See also actuator_disc.
 
 % Copyright Sky Sartorius.
