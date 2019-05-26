@@ -19,8 +19,6 @@ function [thrust,propellerEfficiency,inducedVelocity,idealEfficiency] = ...
 %   There is no unit conversion, so units must be consistent, e.g. power in
 %   ft-lbf/s instead of horsepower.
 % 
-%   Undefined when power = 0 (answer is thrust = 0).
-% 
 %   See also actuator_disc.
 
 % Copyright Sky Sartorius.
@@ -40,6 +38,12 @@ k = sqrt(3.*inducedPower.^3.*(8*area.*density.*velocity.^3 + ...
 thrust = (k.^(2/3)/3 - ...
     (2*inducedPower.*velocity.*(3*area.*density).^(1/3))/3).*...
     ((3*area.*density)./k).^(1/3);
+
+% Do deal with a divide by zero issue, set thrust to zero when power is zero
+% (preserving DimVar units).
+inducedPower = ones(size(thrust)).*inducedPower;
+ind = ~inducedPower;
+thrust(ind) = inducedPower(ind)./velocity;
      
 if nargout > 1
     inducedVelocity = actuator_disc.inducedvelocity(...
