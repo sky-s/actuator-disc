@@ -6,9 +6,10 @@ function [thrust,propellerEfficiency,inducedVelocity,idealEfficiency] = ...
 %   [thrust,propellerEfficiency,inducedVelocity,idealEfficiency] = ...
 %       actuator_disc.thrust(shaftPower,density,area,velocity,discEfficiency)
 % 
-% 	discEfficiency is the efficiency of shaft power inducing flow, i.e.,
-% 	inducedPower/shaftPower, which captures losses from swirl and viscous
-% 	effects. Default discEfficiency = 1 (shaftPower = inducedPower).
+%   discEfficiency, inducedPower/shaftPower, is the efficiency of shaft power
+%   adding momentum to the flow in the useful (i.e. axial) direction, which
+%   captures losses from effects such as swirl and viscosity. Default
+%   discEfficiency = 1 (shaftPower = inducedPower).
 % 
 %   propellerEfficiency is the efficiency of converting shaft power to thrust
 %   power, thrust*velocity/shaftPower.
@@ -39,11 +40,13 @@ thrust = (k.^(2/3)/3 - ...
     (2*inducedPower.*velocity.*(3*area.*density).^(1/3))/3).*...
     ((3*area.*density)./k).^(1/3);
 
-% Do deal with a divide by zero issue, set thrust to zero when power is zero
+% To deal with a divide by zero issue, set thrust to zero when power is zero
 % (preserving DimVar units).
-inducedPower = ones(size(thrust)).*inducedPower;
-ind = ~inducedPower;
-thrust(ind) = inducedPower(ind)./velocity;
+if any(~inducedPower(:))
+    inducedPower = ones(size(thrust)).*inducedPower;
+    ind = ~inducedPower;
+    thrust(ind) = inducedPower(ind)./velocity;
+end
      
 if nargout > 1
     inducedVelocity = actuator_disc.inducedvelocity(...

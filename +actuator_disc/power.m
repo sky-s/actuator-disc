@@ -6,15 +6,18 @@ function [shaftPower,propellerEfficiency,inducedVelocity,idealEfficiency] = ...
 %   [shaftPower,propellerEfficiency,inducedVelocity,idealEfficiency] = ...
 %       actuator_disc.power(thrust,density,area,velocity,discEfficiency)
 % 
-% 	discEfficiency is the efficiency of shaft power inducing flow, i.e.,
-% 	inducedPower/shaftPower, which captures losses from swirl and viscous
-% 	effects. Default discEfficiency = 1 (shaftPower = inducedPower).
+%   area is the effective area of the actuator disc.
+% 
+%   discEfficiency, inducedPower/shaftPower, is the efficiency of shaft power
+%   adding momentum to the flow in the useful (i.e. axial) direction, which
+%   captures losses from effects such as swirl and viscosity. Default
+%   discEfficiency = 1 (shaftPower = inducedPower).
 % 
 %   propellerEfficiency is the efficiency of converting shaft power to thrust
 %   power, thrust*velocity/shaftPower.
 % 
-%   idealEfficiency is momentum theory ideal efficiency, 
-%   velocity/(velocity + inducedVelocity).
+%   idealEfficiency is, given the effective area, momentum theory ideal
+%   efficiency, velocity/(velocity + inducedVelocity).
 % 
 %   There is no unit conversion, so units must be consistent, e.g. power in
 %   ft-lbf/s instead of horsepower.

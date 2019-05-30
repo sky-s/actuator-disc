@@ -1,9 +1,12 @@
 """Actuator disc momentum theory functions.
 
 Notes:
-disc_efficiency is used here as the efficiency of shaft power inducing flow,
-i.e., induced_power/shaft_power, which captures losses from swirl and viscous
-effects.
+area is the effective area of the actuator disc.
+
+disc_efficiency, induced_power/shaft_power, is the efficiency of shaft power
+adding momentum to the flow in the useful (i.e. axial) direction,
+which captures losses from effects such as swirl and viscosity. Default
+discEfficiency = 1 (shaftPower = inducedPower).
 
 There is no unit conversion, so units must be consistent, e.g. power in
 ft-lbf/s instead of horsepower."""
@@ -45,7 +48,7 @@ def propeller_efficiency(thrust, shaft_power, velocity):
 
 
 def ideal_efficiency(induced_velocity, velocity):
-    """Momentum theory ideal efficiency."""
+    """Given the effective area, momentum theory ideal efficiency."""
     return velocity / (velocity + induced_velocity)
 
 

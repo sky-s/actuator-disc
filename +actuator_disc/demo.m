@@ -15,7 +15,7 @@
 density = 1.225; % kg/m^3
 area = 2; % m^2
 discEfficiency = 0.85;
-velocity = 0:100; % m/s
+velocity = -10:100; % m/s
 thrust = 2000; % N
 
 [shaftPower,propellerEfficiency,~,idealEfficiency] = ...
@@ -37,20 +37,24 @@ title('Constant thrust')
 density = 0.002*u.slug/u.ft^3;
 area = 30*u.ft^2;
 discEfficiency = 0.85;
-velocity = linspace(-10,200)*u.kts;
+velocity = (-20:200)*u.kts;
 shaftPower = 200*u.hp;
 
-[thrust,propellerEfficiency,~,idealEfficiency] = ...
+[thrust,propellerEfficiency,inducedVelocity,idealEfficiency] = ...
     actuator_disc.thrust(shaftPower,density,area,velocity,discEfficiency);
 
 % Plotting.
 figure
-subplot(2,1,2)
+subplot(3,1,3)
 plot(velocity/u.kts,thrust/u.lbf)
 xlabel('Velocity (ktas)')
 ylabel('Thrust (lb_f)')
 
-subplot(2,1,1)
+subplot(3,1,2)
+plot(velocity/u.kts,inducedVelocity/u.fps)
+ylabel('Induced velocity (fps)')
+
+subplot(3,1,1)
 plot(velocity/u.kts,idealEfficiency*100,velocity/u.kts,propellerEfficiency*100)
 ylabel('Efficiency (%)')
 legend('\eta_{ideal}','\eta_{propeller}')
