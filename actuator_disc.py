@@ -25,13 +25,13 @@ def induced_velocity(thrust, density, area, velocity=0):
 def thrust(shaft_power, density, area, velocity=0, disc_efficiency=1):
     """Actuator disc thrust calculation (inverse classic momentum theory)."""
     induced_power = shaft_power * disc_efficiency
-    k = np.sqrt(3 * induced_power**3 * (
-                8 * area * density * velocity**3 + 27 * induced_power)) \
-        + 9 * induced_power**2
-
-    return (k**(2 / 3) / 3 - (2 * induced_power * velocity *
-                              (3 * area * density)**(1 / 3)) / 3) \
-        * ((3 * area * density) / k)**(1 / 3)
+    k = density * area
+    mu = k * (2 / 3 * velocity) ** 3
+    alpha = induced_power ** (3 / 2) * np.sqrt(
+        mu + induced_power) + induced_power ** 2
+    beta = k ** 2 * induced_power / (
+                1 + np.sqrt(np.divide(mu, induced_power) + 1))
+    return (k * alpha) ** (1 / 3) - 2 / 3 * velocity * beta ** (1 / 3)
 
 
 def power(thrust, density, area, velocity=0, disc_efficiency=1):
@@ -67,3 +67,9 @@ if __name__ == "__main__":
 
     err = thrust_2 - thrust_1
     print("Max error: %g" % max(abs(err)))
+
+    """Check behavior with power=0."""
+    import warnings
+    warnings.filterwarnings("ignore", message="divide by zero encountered in "
+                                              "true_divide")
+    print("Thrust when power=0: %g" % thrust(0, 1, 1, 1, 1))

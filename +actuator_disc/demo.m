@@ -87,3 +87,8 @@ end
 figure
 plot(thrustError)
 ylabel('Thrust error')
+fprintf('Max error: %g\n',max(abs(thrustError(:))))
+
+if isnan(actuator_disc.thrust(0,1,1,1,1))
+    warning('T=NaN when P=0')
+end

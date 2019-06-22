@@ -34,19 +34,12 @@ end
 
 inducedPower = shaftPower.*discEfficiency;
 
-k = sqrt(3.*inducedPower.^3.*(8*area.*density.*velocity.^3 + ...
-    27.*inducedPower)) + 9*inducedPower.^2;
-thrust = (k.^(2/3)/3 - ...
-    (2*inducedPower.*velocity.*(3*area.*density).^(1/3))/3).*...
-    ((3*area.*density)./k).^(1/3);
+k = density.*area;
+mu = k.*(2/3.*velocity).^3;
+alpha = inducedPower.^(3/2).*sqrt(mu + inducedPower) + inducedPower.^2;
+beta = k.^2.*inducedPower./(1 + sqrt(mu./inducedPower + 1));
 
-% To deal with a divide by zero issue, set thrust to zero when power is zero
-% (preserving DimVar units).
-if any(~inducedPower(:))
-    inducedPower = ones(size(thrust)).*inducedPower;
-    ind = ~inducedPower;
-    thrust(ind) = inducedPower(ind)./velocity;
-end
+thrust = (k.*alpha).^(1/3) - 2/3*velocity.*beta.^(1/3);
      
 if nargout > 1
     inducedVelocity = actuator_disc.inducedvelocity(...
