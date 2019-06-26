@@ -36,7 +36,7 @@ To run the demo / test:
 - Excel / VBA: open workbook
 
 ## Cite as
-Sky Sartorius (2019). Actuator Disc Momentum Theory with Inverse Formulation (https://www.github.com/sky-s/physical-units-for-matlab), GitHub. Retrieved MMM DD, YYYY.
+Sky Sartorius (2019). Actuator Disc Momentum Theory with Inverse Formulation (https://github.com/sky-s/actuator-disc), GitHub. Retrieved MMM DD, YYYY.
 
 #
 Copyright (c) 2013-2019, Sky Sartorius
