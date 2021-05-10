@@ -3,7 +3,7 @@
 %   <a href="matlab:actuator_disc.demo">Run demo</a>.
 %   <a href="matlab:edit actuator_disc.demo">Open demo</a>.
 % 
-%   Part of the demo (but not the tools) uses the Pysical Units Toolbox:
+%   Part of the demo (but not the tools) uses the Physical Units Toolbox:
 %       https://www.mathworks.com/matlabcentral/fileexchange/38977.
 % 
 %   See also actuator_disc.
