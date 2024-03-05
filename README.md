@@ -2,6 +2,8 @@
 This repository contains some implementations of classic momentum theory. The primary purpose is to encode the equations for the inverse form that is able to, without solving iteratively, calculate thrust as a function of induced power (classic momentum theory is only able to find induced power as a function of thrust).
 
 ## Formulation
+_These equations only have good visibility in light theme._
+
 Momentum theory relates induced power, ![](http://latex.codecogs.com/png.latex?P_i), to thrust, ![](http://latex.codecogs.com/png.latex?T), freestream velocity, ![](http://latex.codecogs.com/png.latex?V_0), fluid density, ![](http://latex.codecogs.com/png.latex?\rho), and disc area, ![](http://latex.codecogs.com/png.latex?A), as follows:
 
 ### Classic
