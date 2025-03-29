@@ -65,4 +65,4 @@ To run the demo / test:
 Sky Sartorius (2019). Actuator Disc Momentum Theory with Inverse Formulation (https://github.com/sky-s/actuator-disc), GitHub. Retrieved MMM DD, YYYY.
 
 #
-Copyright (c`$ 2013-2019, Sky Sartorius
+Copyright (c) 2013-2019, Sky Sartorius
